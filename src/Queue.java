@@ -9,8 +9,11 @@ public class Queue {
         Queue = new int[size];
         back = 0;
     }
-    public Queue (int[] QueueN, int numbersEnter) {
-        Queue = QueueN;
+    public Queue (int[] QueueN, int numbersEnter, int size) {
+        Queue = new int[size];
+        for (int i = 0; i < QueueN.length; i++) {
+            Queue[i] = QueueN[i];
+        }
         back = numbersEnter;
     }
     public boolean isFull() {
@@ -29,7 +32,6 @@ public class Queue {
     public void enqueue(int i) {
         if (isFull()) {
             System.out.println("Queue if full");
-            return;
         }
         else {
             Queue[back] = i;
@@ -55,12 +57,11 @@ public class Queue {
         return back;
     }
 
-    public int front() {
+    public String front() {
         if (isEmpty()) {
-            System.out.println("Queue is empty");
-            return -1;
+            return "Queue is empty";
         }
-        return Queue[0];
+        return "" + Queue[0];
     }
 
     public void makeEmpty() {

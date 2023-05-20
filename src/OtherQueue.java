@@ -1,34 +1,39 @@
+import javax.print.attribute.standard.MediaSize;
+
 public class OtherQueue {
-    private int[] Queue;
+    private int[] OtherQueue;
     private int back;
     private int front;
     public OtherQueue() {
-        Queue = new int[100];
+        OtherQueue = new int[100];
         back = 0;
         front = 0;
     }
 
     public OtherQueue(int size) {
-        Queue = new int[size];
+        OtherQueue = new int[size];
         back = 0;
         front = 0;
     }
 
-    public OtherQueue(int[] QueueN, int numbersEnter) {
-        Queue = QueueN;
-        back = numbersEnter;
+    public OtherQueue(int[] QueueN, int numbersEnter, int size) {
+        OtherQueue = new int[size];
+        for (int i = 0; i < QueueN.length; i++) {
+            OtherQueue[i] = QueueN[i];
+        }
+        back = numbersEnter-1;
         front = 0;
     }
 
     public boolean isFull() {
-        if (back == Queue.length) {
+        if (size() == OtherQueue.length) {
             return true;
         }
         return false;
     }
 
     public boolean isEmpty() {
-        if (back == 0) {
+        if (size() == 0) {
             return true;
         }
         return false;
@@ -37,37 +42,34 @@ public class OtherQueue {
     public void enqueue(int i) {
         if (isFull()) {
             System.out.println("Queue if full");
-            return;
         } else {
-            Queue[back] = i;
             back++;
+            OtherQueue[back] = i;
         }
     }
 
-    public int dequeue() {
+    public String dequeue() {
         if (isEmpty()) {
-            System.out.println("Queue is empty");
-            return -1;
+            return "OtherQueue is empty";
         } else {
-            int value = Queue[0];
+            int value = OtherQueue[0];
             for (int i = 0; i < back; i++) {
-                Queue[i] = Queue[i + 1];
+                OtherQueue[i] = OtherQueue[i + 1];
             }
             back--;
-            return value;
+            return "" + value;
         }
     }
 
     public int size() {
-        return back;
+        return back - front + 2;
     }
 
-    public int front() {
+    public String front() {
         if (isEmpty()) {
-            System.out.println("Queue is empty");
-            return -1;
+            return "OtherQueue is empty";
         }
-        return Queue[0];
+        return "" + OtherQueue[0];
     }
 
     public void makeEmpty() {
@@ -77,7 +79,7 @@ public class OtherQueue {
     public String toString() {
         String values = "";
         for (int i = 0; i < back; i++) {
-            values += Queue[i] + " ";
+            values += OtherQueue[i] + " ";
         }
         return values;
     }
